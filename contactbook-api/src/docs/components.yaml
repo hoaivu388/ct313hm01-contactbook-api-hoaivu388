@@ -1,0 +1,63 @@
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the contact
+          readOnly: true
+        name:
+          type: string
+          description: The name of the contact
+        email:
+          type: string
+          format: email
+          description: The email address of the contact
+        address:
+          type: string
+          description: The address of the contact
+        phone:
+          type: string
+          description: The phone number of the contact
+        favorite:
+          type: integer
+          enum: [0, 1]
+          default: 0
+          description: The favorite status of the contact
+        avatar:
+          type: string
+          readOnly: true
+          description: The avatar of the contact
+        avatarURL:
+          type: string
+          format: binary
+          description: The avatar URL of the contact
+
+  responses:
+    '200NoData':
+      description: A successful response with no data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The status of the response
+                enum:
+                  - success
+              data:
+                type: object
+                nullable: true
+                default: null
+                description: The data of the response
+
+  parameters:
+    contactId:
+      name: id
+      in: path
+      description: The id of the contact
+      required: true
+      schema:
+        type: integer
