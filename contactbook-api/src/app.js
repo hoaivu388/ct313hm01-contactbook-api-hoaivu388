@@ -10,19 +10,17 @@ const {specs, swaggerUi} = require('./docs/swagger');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/public',express.static('public'));
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.get('/', (req, res) => {
     res.json(jsend.success());
 });
+app.use('/public',express.static('public'));
 
 contactsRouter.setup(app);
 app.use(errorsController.resourceNotFound);
 app.use(errorsController.handleError);
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
 
 module.exports = app;
